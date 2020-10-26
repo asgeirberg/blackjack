@@ -1,1 +1,1 @@
-A simple Blackjack game
+A simple Blackjack game written in Python
