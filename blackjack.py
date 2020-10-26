@@ -293,6 +293,7 @@ while 1==1:
 
     if len(deck) > 52: 
         print("Too many cards in deck...")
+        print(len(deck))
 
     print("\nStarting Round " + str(round_number) + "\n")
 
@@ -312,30 +313,27 @@ while 1==1:
     time.sleep(0.5)
 
     for _ in range(START_CARDS):
-
         player.add_cards(deck.deal_one())
         dealer.add_cards(deck.deal_one())
 
-    #player.add_cards(Card(suit="Hearts", rank = "Three"))
-    #player.add_cards(Card(suit="Spades", rank = "Jack"))
-    #dealer.add_cards(Card(suit="Clubs", rank = "Three"))
-    #dealer.add_cards(Card(suit="Spades", rank = "Two"))
-
     print_table(amount_in_play, dealer.hand)
 
-    if evaluate_hand(player.hand, natural = True) == "Natural" and evaluate_hand(dealer.hand, natural = True) != "Natural":
-        print("Blackjack. You won!")
-        player.add_money(amount_in_play * 2) #doubles the money the player gets back
-        amount_in_play = 0
-        continue
-
-    elif evaluate_hand(player.hand, natural = True) == "Natural" and evaluate_hand(dealer.hand, natural = True) == "Natural":
-        print("Dealer also has Blackjack: " + str(dealer.hand[1]) + " and "  + str(dealer.hand[0]) + ".  Nobody wins!")
-        amount_in_play = 0
-        player.add_money(amount_in_play) #Player gets money back 
-        continue
-
     while game_on == True:
+
+        if evaluate_hand(player.hand, natural = True) == "Natural" and evaluate_hand(dealer.hand, natural = True) != "Natural":
+            print("Blackjack. You won!")
+            player.add_money(amount_in_play * 2) #doubles the money the player gets back
+            amount_in_play = 0
+
+            break
+
+        elif evaluate_hand(player.hand, natural = True) == "Natural" and evaluate_hand(dealer.hand, natural = True) == "Natural":
+            print("Dealer also has Blackjack: " + str(dealer.hand[1]) + " and "  + str(dealer.hand[0]) + ".  Nobody wins!")
+            amount_in_play = 0
+            player.add_money(amount_in_play) #Player gets money back 
+
+            break
+
         answer = ask_input("Do you want to Hit or Stand (h/s)?", ["h", "s", "q"])
 
         if answer == "h":
@@ -405,11 +403,13 @@ while 1==1:
         elif answer == "y":
             round_number += 1
 
+            print("I am here")
+            print(dealer.hand)
             deck.get_cards(dealer.give_cards())
-            deck.get_cards(player.give_cards())
-
-            continue    
-
+            print(dealer.hand)
+            print(player.hand)
+            deck.get_cards(player.give_cards())   
+            print(player.hand)
 
 
 
