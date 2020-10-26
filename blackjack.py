@@ -403,13 +403,9 @@ while 1==1:
         elif answer == "y":
             round_number += 1
 
-            print("I am here")
-            print(dealer.hand)
             deck.get_cards(dealer.give_cards())
-            print(dealer.hand)
-            print(player.hand)
             deck.get_cards(player.give_cards())   
-            print(player.hand)
+
 
 
 
