@@ -133,3 +133,4 @@ dmypy.json
 ._*
 Thumbs.db
 Desktop.ini
+.vscode
